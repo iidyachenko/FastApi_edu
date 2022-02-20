@@ -39,3 +39,9 @@ def get_clear_phone(phone: Phone):
 def get_clear_phone(phone: str = Form(...)):
     result = phone_process(phone)
     return Response(content=result, media_type="text/html")
+
+
+@app.post("/unify_phone_from_query/")
+def get_clear_phone(phone: str):
+    result = phone_process(phone)
+    return Response(content=result, media_type="text/html")
