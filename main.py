@@ -1,5 +1,5 @@
 
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, Form
 from pydantic import BaseModel
 
 
@@ -32,4 +32,10 @@ def read_root():
 @app.post("/unify_phone_from_json")
 def get_clear_phone(phone: Phone):
     result = phone_process(phone.phone)
+    return Response(content=result, media_type="text/html")
+
+
+@app.post("/unify_phone_from_form")
+def get_clear_phone(phone: str = Form(...)):
+    result = phone_process(phone)
     return Response(content=result, media_type="text/html")
