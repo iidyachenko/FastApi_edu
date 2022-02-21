@@ -1,6 +1,7 @@
 
-from fastapi import FastAPI, Response, Form, Query
+from fastapi import FastAPI, Response, Form, Query, Cookie
 from pydantic import BaseModel
+from typing import Optional
 
 
 class Phone(BaseModel):
@@ -43,5 +44,11 @@ def get_clear_phone(phone: str = Form(...)):
 
 @app.get("/unify_phone_from_query")
 def get_clear_phone(phone: str = Query(None)):
+    result = phone_process(phone)
+    return Response(content=result, media_type="text/html")
+
+
+@app.get("/unify_phone_from_cookies")
+def get_clear_phone(phone: Optional[str] = Cookie(None)):
     result = phone_process(phone)
     return Response(content=result, media_type="text/html")
