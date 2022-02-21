@@ -1,5 +1,5 @@
 
-from fastapi import FastAPI, Response, Form
+from fastapi import FastAPI, Response, Form, Query
 from pydantic import BaseModel
 
 
@@ -42,6 +42,6 @@ def get_clear_phone(phone: str = Form(...)):
 
 
 @app.post("/unify_phone_from_query")
-def get_clear_phone(phone: str):
+def get_clear_phone(phone: str = Query(None)):
     result = phone_process(phone)
     return Response(content=result, media_type="text/html")
